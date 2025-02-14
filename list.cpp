@@ -27,19 +27,29 @@ const string &LinkedList::front() const
 
 void LinkedList::addFront(const string &toInsert)
 {
+
+     Node * newNodeAtFront = new Node;
+    newNodeAtFront->m_elem = toInsert;
+
+
+newNodeAtFront->m_next = m_head;//connect the
+m_head = newNodeAtFront;//update the head to new node
+
+
+
 }
 
 void LinkedList::removeFront()
 {
 }
-
+/*
 void LinkedList::append(const string &toInsert)
 {
 
-    /*
+
         1. Frist check is the list empty
         2. Does list has only one node
-    */
+
     Node *m_nodeToInsert = new Node;
 
     m_nodeToInsert->m_next = nullptr;
@@ -90,14 +100,19 @@ void LinkedList::removeTail()
     delete temp->m_next;
     temp->m_next = nullptr;
 }
-
+*/
 void LinkedList::addInBetween(const string &e,
                               const string &toInsert)
 {
+
+
 }
 
 void LinkedList::remove(const string &e)
 {
+
+
+
 }
 
 void LinkedList::printList()
@@ -114,17 +129,53 @@ void LinkedList::printList()
     }
     cout << "END" << endl;
 }
-
+//Apped the elemnet at the end of the linked list
 void LinkedList::append(const string &toInsert)
 {
-    /************************
-     * To be implemented
-     * *********************/
+    /*
+        1. First check the LL is empty of not
+        2. Create the node you want to insert
+        3. What if there is only one node in the LL
+    */
+
+     Node * nodeToInsert = new Node;
+     nodeToInsert->m_next = nullptr;
+     nodeToInsert->m_elem = toInsert;
+
+     if(m_head == nullptr){
+        m_head = nodeToInsert;
+        return;
+
+     }
+      Node * temp = m_head;
+
+     while(temp->m_next != nullptr){
+        temp = temp->m_next;
+     }
+
+     temp->m_next = nodeToInsert;
+
 }
 
 void LinkedList::removeTail()
 {
-    /************************
-     * To be implemented
-     * *********************/
+            //Check if the list is empty
+        if(m_head == nullptr){
+            return;
+            }
+        //if LL has only one item
+        if(m_head->m_next == nullptr){
+           delete m_head;
+        m_head == nullptr;
+        return;
+        }
+        Node * temp = m_head;
+
+        while(temp->m_next->m_next != nullptr){
+            temp = temp->m_next;
+        }
+        Node * toDelete = temp->m_next;
+        temp->m_next = nullptr;
+        delete toDelete;
+
 }

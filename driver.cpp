@@ -2,20 +2,28 @@
 using namespace std;
 bool testAddFront1();
 bool testAddFront2();
-void testRemoveFront1();
+//void testRemoveFront1();
+
+ LinkedList aPath;
 //this is a sample driver program
 //it is not a rigorous test program
 //in projects we need to test rigorously
 int main(){
+
+    // aPath.printList();
     try{
-        testAddFront1();
+       testAddFront1();
         testAddFront2();
-        testRemoveFront1();
+      //  testRemoveFront1();
     }
     catch(std::runtime_error &e){
         cout << "testRemoveFront1() PASSED!" << endl;
         cout << e.what() << endl;
     }
+ while(!aPath.empty()){
+    aPath.printList();
+ }
+
     return 0;
 }
 /***************************************
@@ -47,14 +55,14 @@ bool testAddFront1(){
  * ************************************/
 bool testAddFront2(){
     bool returnVal = false;
-    LinkedList aPath;
+
     string airports[] = {"BOS","ATL","MSP","LAX"};
     for (int i=0;i<4;i++)
         aPath.addFront(airports[i]);
     for (int j=4;j>0;j--){
         if (aPath.front() == airports[j]){
             returnVal = true;
-            aPath.removeFront();
+           // aPath.removeFront();
         }
         else
             returnVal = false;
