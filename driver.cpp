@@ -1,17 +1,35 @@
 #include "list.h"
 using namespace std;
 bool testAddFront1();
-// bool testAddFront2();
+bool testAddFront2();
 bool testAppend();
 bool testRemoveTail();
 bool testRemoveFront1();
+bool testGetTailEle();
 
 // this is a sample driver program
 // it is not a rigorous test program
 // in projects we need to test rigorously
+
 int main()
 {
-    cout << "Append function passed" << testAppend() << endl;
+
+    if (testGetTailEle())
+        cout << "Get tail test pass : " << endl;
+    else
+        cout << "fail" << endl;
+    /*
+    if (testAppend())
+     {
+
+         cout << "+++++++++++++++++++++ " << endl;
+     }
+     else
+     {
+         cout << "Append function failed" << endl;
+     }
+
+    */
 
     /*
     if (testAppend())
@@ -97,11 +115,11 @@ int main()
     return returnVal;
 }
 */
-bool testAppend()
+
+bool testGetTailEle()
 {
-    LinkedList aPath;
     bool result = false;
-    ;
+    LinkedList aPath;
     string students[] = {"Imran", "Rizwan", "Ahatsham", "Ambreen"};
 
     int lengthOfStrArr = sizeof(students) / sizeof(students[0]);
@@ -110,27 +128,171 @@ bool testAppend()
     {
         aPath.append(students[ix]);
     }
+    aPath.printList();
 
-    // aPath.printList();
+    // Math the last element with the tail element
 
-    int index = lengthOfStrArr;
-    int counter = 0;
-    while (!aPath.empty())
+    string tailEle = aPath.getTailEle();
+    string arrayLastEle = students[lengthOfStrArr - 1];
+
+    if (tailEle == arrayLastEle)
     {
-        // Check if the last appened element into the list is
-        // not equal to the last element of the string array
-        if (!(aPath.getTailEle() == students[index - 1]))
-        {
-            return result; // return false if not equal
-        }
+        result = true;
+        return result;
     }
-
-    result = true;
-    return true; // return true if equal which verifies that
-    // last element appended into the list was appended succesfully
+    return result;
 }
+
+bool testAppend()
+{
+
+    LinkedList aPath;
+    try
+    {
+        cout << "Starting testAppend()..." << endl; // Debugging message
+                                                    //   LinkedList aPath;
+        string students[] = {"Imran", "Rizwan", "Ahatsham", "Ambreen"};
+
+        int lengthOfStrArr = sizeof(students) / sizeof(students[0]);
+
+        for (int ix = 0; ix < lengthOfStrArr; ix++)
+        {
+            cout << "Appending: " << students[ix] << endl; // Debugging message
+            aPath.append(students[ix]);
+        }
+
+        // Append one more element to test
+        cout << "Appending: Taskeen" << endl; // Debugging message
+        aPath.append("Taskeen");
+
+        // Debugging message
+        cout << "Trying to get last element..." << endl;
+        string lastElement = aPath.getTailEle();
+        cout << "Last element should be Taskeen: " << lastElement << endl;
+
+        // Check if the last appended element is "Taskeen"
+        if (lastElement != "Taskeen")
+        {
+            cout << "Test failed! Last element is: " << lastElement << endl;
+            return false;
+        }
+
+        cout << "Append test passed!" << endl;
+        return true;
+    }
+    catch (const exception &e)
+    {
+        cout << "Exception in testAppend(): " << e.what() << endl;
+        return false;
+    }
+}
+
 bool testRemoveTail()
 {
 
     return true;
+}
+
+bool testRemoveTail()
+{
+    try
+    {
+        // 1. Test Removing from an Empty List (Case 1)
+        {
+            LinkedList myList;
+            try
+            {
+                myList.removeTail(); // Should throw an exception
+                cout << "Test Failed: Expected an exception when removing from an empty list." << endl;
+                return false;
+            }
+            catch (const runtime_error &e)
+            {
+                cout << "Test Passed: Caught exception - " << e.what() << endl;
+            }
+        }
+
+        // 2. Test Removing from a List with One Element (Case 2)
+        {
+            LinkedList myList;
+            myList.append("A");
+            myList.removeTail();
+
+            if (myList.isEmpty()) // Assuming isEmpty() checks `m_head == nullptr`
+            {
+                cout << "Test Passed: Single element removed correctly." << endl;
+            }
+            else
+            {
+                cout << "Test Failed: List is not empty after removing the only element." << endl;
+                return false;
+            }
+        }
+
+        // 3. Test Removing from a List with Two Elements (Case 3)
+        {
+            LinkedList myList;
+            myList.append("A");
+            myList.append("B");  // List: A → B
+            myList.removeTail(); // Remove "B"
+
+            if (myList.getTailEle() == "A")
+            {
+                cout << "Test Passed: Last element removed, first element remains." << endl;
+            }
+            else
+            {
+                cout << "Test Failed: Incorrect last element after removal." << endl;
+                return false;
+            }
+        }
+
+        // 4. Test Removing from a List with Multiple Elements (Case 4)
+        {
+            LinkedList myList;
+            myList.append("A");
+            myList.append("B");
+            myList.append("C");  // List: A → B → C
+            myList.removeTail(); // Remove "C"
+
+            if (myList.getTailEle() == "B")
+            {
+                cout << "Test Passed: Last element removed, previous element is new tail." << endl;
+            }
+            else
+            {
+                cout << "Test Failed: Tail is incorrect after removal." << endl;
+                return false;
+            }
+        }
+
+        // 5. Test Removing Until the List is Empty (Case 5)
+        {
+            LinkedList myList;
+            myList.append("X");
+            myList.append("Y");
+            myList.append("Z"); // List: X → Y → Z
+
+            myList.removeTail(); // Removes "Z"
+            myList.removeTail(); // Removes "Y"
+            myList.removeTail(); // Removes "X"
+
+            if (myList.isEmpty())
+            {
+                cout << "Test Passed: List is empty after multiple removals." << endl;
+            }
+            else
+            {
+                cout << "Test Failed: List should be empty but is not." << endl;
+                return false;
+            }
+        }
+
+        return true; // All tests passed
+    }
+    catch (const exception &e)
+    {
+        cout << "Exception in testRemoveTail(): " << e.what() << endl;
+        return false;
+    }
 }

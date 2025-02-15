@@ -38,7 +38,7 @@ void LinkedList::addFront(const string &toInsert)
 Node *const LinkedList::getHead() const
 {
 
-   return m_head;
+    return m_head;
 }
 
 void LinkedList::removeFront()
@@ -129,28 +129,26 @@ void LinkedList::printList()
 // Apped the elemnet at the end of the linked list
 void LinkedList::append(const string &toInsert)
 {
-    /*
-        1. First check the LL is empty of not
-        2. Create the node you want to insert
-        3. What if there is only one node in the LL
-    */
-
+    // Step 1: Create the new node
     Node *nodeToInsert = new Node;
-    nodeToInsert->m_next = nullptr;
     nodeToInsert->m_elem = toInsert;
+    nodeToInsert->m_next = nullptr;
 
+    // Step 2: Check if list is empty
     if (m_head == nullptr)
     {
         m_head = nodeToInsert;
         return;
     }
-    Node *temp = m_head;
 
+    // Step 3: Traverse to the last node
+    Node *temp = m_head;
     while (temp->m_next != nullptr)
     {
         temp = temp->m_next;
     }
 
+    // Step 4: Append the new node
     temp->m_next = nodeToInsert;
 }
 
@@ -159,13 +157,14 @@ void LinkedList::removeTail()
     // Check if the list is empty
     if (m_head == nullptr)
     {
-        return;
+        throw runtime_error("List is empty cant remove tail");
+
     }
     // if LL has only one item
     if (m_head->m_next == nullptr)
     {
         delete m_head;
-        m_head == nullptr;
+        m_head = nullptr;
         return;
     }
     Node *temp = m_head;
@@ -180,16 +179,15 @@ void LinkedList::removeTail()
 }
 
 const string &LinkedList::getTailEle() const
-{ // get front element
-    if(m_head == nullptr){
-        throw runtime_error("Error: Reading front of empty list!");
-        return m_head->m_elem;
+{
+    if (m_head == nullptr)
+    {
+        throw runtime_error("List is empty");
     }
-    if(m_head->m_next == nullptr){
-        return m_head->m_elem;
-    }
+
     Node *temp = m_head;
-    while (temp->m_next != nullptr){
+    while (temp->m_next != nullptr)
+    {
         temp = temp->m_next;
     }
     return temp->m_elem;
