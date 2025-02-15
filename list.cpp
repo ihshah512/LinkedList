@@ -28,15 +28,17 @@ const string &LinkedList::front() const
 void LinkedList::addFront(const string &toInsert)
 {
 
-     Node * newNodeAtFront = new Node;
+    Node *newNodeAtFront = new Node;
     newNodeAtFront->m_elem = toInsert;
 
+    newNodeAtFront->m_next = m_head; // connect the
+    m_head = newNodeAtFront;         // update the head to new node
+}
 
-newNodeAtFront->m_next = m_head;//connect the
-m_head = newNodeAtFront;//update the head to new node
+Node *const LinkedList::getHead() const
+{
 
-
-
+   return m_head;
 }
 
 void LinkedList::removeFront()
@@ -104,15 +106,10 @@ void LinkedList::removeTail()
 void LinkedList::addInBetween(const string &e,
                               const string &toInsert)
 {
-
-
 }
 
 void LinkedList::remove(const string &e)
 {
-
-
-
 }
 
 void LinkedList::printList()
@@ -129,7 +126,7 @@ void LinkedList::printList()
     }
     cout << "END" << endl;
 }
-//Apped the elemnet at the end of the linked list
+// Apped the elemnet at the end of the linked list
 void LinkedList::append(const string &toInsert)
 {
     /*
@@ -138,44 +135,62 @@ void LinkedList::append(const string &toInsert)
         3. What if there is only one node in the LL
     */
 
-     Node * nodeToInsert = new Node;
-     nodeToInsert->m_next = nullptr;
-     nodeToInsert->m_elem = toInsert;
+    Node *nodeToInsert = new Node;
+    nodeToInsert->m_next = nullptr;
+    nodeToInsert->m_elem = toInsert;
 
-     if(m_head == nullptr){
+    if (m_head == nullptr)
+    {
         m_head = nodeToInsert;
         return;
+    }
+    Node *temp = m_head;
 
-     }
-      Node * temp = m_head;
-
-     while(temp->m_next != nullptr){
+    while (temp->m_next != nullptr)
+    {
         temp = temp->m_next;
-     }
+    }
 
-     temp->m_next = nodeToInsert;
-
+    temp->m_next = nodeToInsert;
 }
 
 void LinkedList::removeTail()
 {
-            //Check if the list is empty
-        if(m_head == nullptr){
-            return;
-            }
-        //if LL has only one item
-        if(m_head->m_next == nullptr){
-           delete m_head;
+    // Check if the list is empty
+    if (m_head == nullptr)
+    {
+        return;
+    }
+    // if LL has only one item
+    if (m_head->m_next == nullptr)
+    {
+        delete m_head;
         m_head == nullptr;
         return;
-        }
-        Node * temp = m_head;
+    }
+    Node *temp = m_head;
 
-        while(temp->m_next->m_next != nullptr){
-            temp = temp->m_next;
-        }
-        Node * toDelete = temp->m_next;
-        temp->m_next = nullptr;
-        delete toDelete;
+    while (temp->m_next->m_next != nullptr)
+    {
+        temp = temp->m_next;
+    }
+    Node *toDelete = temp->m_next;
+    temp->m_next = nullptr;
+    delete toDelete;
+}
 
+const string &LinkedList::getTailEle() const
+{ // get front element
+    if(m_head == nullptr){
+        throw runtime_error("Error: Reading front of empty list!");
+        return m_head->m_elem;
+    }
+    if(m_head->m_next == nullptr){
+        return m_head->m_elem;
+    }
+    Node *temp = m_head;
+    while (temp->m_next != nullptr){
+        temp = temp->m_next;
+    }
+    return temp->m_elem;
 }
