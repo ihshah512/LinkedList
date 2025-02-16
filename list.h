@@ -22,7 +22,8 @@ public:
   void printList();
   Node *const getHead() const;
   const string &getTailEle() const;
-  LinkedList & operator=(const LinkedList &other); // string
+  LinkedList & operator=(const LinkedList &orignal); // string
+  bool compareTwoNodes(const LinkedList &orignal);
 
 private:
   Node *m_head; // pointer to the head of list

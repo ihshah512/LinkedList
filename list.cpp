@@ -221,17 +221,46 @@ LinkedList &LinkedList::operator=(const LinkedList &orignal)
 
     // Now copyToList is competly empty now copy over the orignal list nodes into "this"
 
-    m_head = new Node(orignal.m_head->m_elem);
-    Node *current = m_head;
+    this->m_head = new Node();
+    this->m_head->m_elem = orignal.m_head->m_elem;
+
+    Node *current = this->m_head;
     Node *orignalNode = orignal.m_head->m_next;
 
     // 5. Deep copy the rest of the nodes
     while (orignalNode)
     {
-        current->m_next = new Node(orignalNode->m_elem); // Correct deep copy
+        current->m_next = new Node; // Correct deep copy
+        current->m_next->m_elem = orignalNode->m_elem;
         current = current->m_next;
         orignalNode = orignalNode->m_next;
     }
 
     return *this;
+}
+
+bool LinkedList::compareTwoNodes(const LinkedList &orignal)
+{
+
+    Node *copyToNode = m_head;
+    Node *orignalNode = orignal.m_head;
+
+    while (copyToNode != nullptr && orignalNode != nullptr)
+    {
+
+        if (copyToNode->m_elem != orignalNode->m_elem)
+        {
+
+            return false;
+        }
+        copyToNode = copyToNode->m_next;
+        orignalNode = orignalNode->m_next;
+    }
+    if (copyToNode != nullptr || orignalNode != nullptr)
+    {
+
+        return false;
+    }
+
+    return true;
 }

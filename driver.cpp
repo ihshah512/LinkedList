@@ -6,6 +6,7 @@ bool testAppend();
 bool testRemoveTail();
 bool testRemoveFront1();
 bool testGetTailEle();
+bool testAssignmentOperator();
 
 // this is a sample driver program
 // it is not a rigorous test program
@@ -13,13 +14,21 @@ bool testGetTailEle();
 
 int main()
 {
+    testAssignmentOperator();
 
+    if (testAssignmentOperator())
+    {
+        cout << "Assignment operator worked" << endl;
+    };
+    /*
     testRemoveTail();
 
-    if (testGetTailEle())
-        cout << "Get tail test pass : " << endl;
-    else
-        cout << "fail" << endl;
+     if (testGetTailEle())
+         cout << "Get tail test pass : " << endl;
+     else
+         cout << "fail" << endl;
+
+    */
     /*
     if (testAppend())
      {
@@ -291,4 +300,36 @@ bool testRemoveTail()
         cout << "Exception in testRemoveTail(): " << e.what() << endl;
         return false;
     }
+}
+
+bool testAssignmentOperator()
+{
+
+    LinkedList orignalList;
+
+    string students[] = {"Imran", "Rizwan", "Ahatsham", "Ambreen"};
+
+    int lengthOfStrArr = sizeof(students) / sizeof(students[0]);
+
+    for (int ix = 0; ix < lengthOfStrArr; ix++)
+    {
+        orignalList.append(students[ix]);
+    }
+
+    // cout << "Printing orignal list " << endl;
+    // orignalList.printList();
+
+    LinkedList copyToList;
+
+    copyToList = orignalList;
+
+    bool compareResult = copyToList.compareTwoNodes(orignalList);
+
+    if (compareResult)
+    {
+
+        return true;
+    }
+
+    return false;
 }
