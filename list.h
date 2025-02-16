@@ -22,7 +22,7 @@ public:
   void printList();
   Node *const getHead() const;
   const string &getTailEle() const;
-  // string
+  LinkedList & operator=(const LinkedList &other); // string
 
 private:
   Node *m_head; // pointer to the head of list

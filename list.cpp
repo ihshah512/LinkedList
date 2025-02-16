@@ -158,7 +158,6 @@ void LinkedList::removeTail()
     if (m_head == nullptr)
     {
         throw runtime_error("List is empty cant remove tail");
-
     }
     // if LL has only one item
     if (m_head->m_next == nullptr)
@@ -191,4 +190,48 @@ const string &LinkedList::getTailEle() const
         temp = temp->m_next;
     }
     return temp->m_elem;
+}
+
+LinkedList &LinkedList::operator=(const LinkedList &orignal)
+{
+
+    // First we would need to check self assignment
+    if (this == &orignal)
+    {
+
+        return *this;
+    }
+
+    // Check if the orignal list is empty or not if empty then set the head of copyToList
+    // to nullptr and return it.
+    if (orignal.m_head == nullptr)
+    {
+        m_head = nullptr;
+        return *this;
+    }
+
+    // Now adelete all the nodes of copyToList to avoid any memory leaks
+    Node *temp;
+    while (m_head)
+    {
+        temp = m_head;
+        m_head = m_head->m_next;
+        delete temp;
+    }
+
+    // Now copyToList is competly empty now copy over the orignal list nodes into "this"
+
+    m_head = new Node(orignal.m_head->m_elem);
+    Node *current = m_head;
+    Node *orignalNode = orignal.m_head->m_next;
+
+    // 5. Deep copy the rest of the nodes
+    while (orignalNode)
+    {
+        current->m_next = new Node(orignalNode->m_elem); // Correct deep copy
+        current = current->m_next;
+        orignalNode = orignalNode->m_next;
+    }
+
+    return *this;
 }

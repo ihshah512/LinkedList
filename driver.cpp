@@ -14,6 +14,8 @@ bool testGetTailEle();
 int main()
 {
 
+    testRemoveTail();
+
     if (testGetTailEle())
         cout << "Get tail test pass : " << endl;
     else
@@ -189,12 +191,6 @@ bool testAppend()
 
 bool testRemoveTail()
 {
-
-    return true;
-}
-
-bool testRemoveTail()
-{
     try
     {
         // 1. Test Removing from an Empty List (Case 1)
@@ -218,7 +214,7 @@ bool testRemoveTail()
             myList.append("A");
             myList.removeTail();
 
-            if (myList.isEmpty()) // Assuming isEmpty() checks `m_head == nullptr`
+            if (myList.empty()) // Assuming isEmpty() checks `m_head == nullptr`
             {
                 cout << "Test Passed: Single element removed correctly." << endl;
             }
@@ -277,7 +273,7 @@ bool testRemoveTail()
             myList.removeTail(); // Removes "Y"
             myList.removeTail(); // Removes "X"
 
-            if (myList.isEmpty())
+            if (myList.empty())
             {
                 cout << "Test Passed: List is empty after multiple removals." << endl;
             }
