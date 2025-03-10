@@ -1,0 +1,113 @@
+1. We can find it by counting the number of primitive operations e.g. addition, substration, multiple, trying to addition
+elements in the array, declaring a vaiable, setting the value to a variable,
+2. Log N is considered as the best run time BIG O. Most of the
+tree data structures are implemmented in log n time.
+
+2N + 100log N
+
+102N
+
+HERE BIG O IS N.
+CONSTANT = 102
+
+EXAMPLE:
+
+LOG N^3 = 3 LOG N
+here BIG 0 = LOG N 
+CONSTANT = 3;
+No = 2 because log 1 = 0
+i is from o to n
+- the inner loop goes n(n-1)/ 2 because its j<=i
+1+2+3+4....(n-1)
+= n(n-1)/2
+
+n^2/2 - n/2 <= n^2 (add the cofficients)
+thats why the algo was running with Big O(N^2)
+
+SLIDE 11/47
+
+BIG OMEGA - IS THE BEST RUNNING TIME OMEGA (N) 
+BIG O - O(N) 
+WORST AND BEST CASE BOTH ARE SAME
+BUT WE ARE HERE INTRESTING IN GROWTH RATE.
+F(N) <= CG(N) ITS BIG O O(G(N)) - THIS WOULD BE THE WORST CASE
+F(N) >= CG(N) ITS OMEGA G(N) THIS WOULD BE THE BEST CASE IN LINEAR 
+THE TIME COMPLEXITY OF OUR PROGRAM WOULD STAY IN THESE TWO BOUNDS BIG O AND OMEGA 
+
+EXAMPLE:
+
+5log(N)>= 3LOGN + 2 >= 3LOG(N)
+BIG OMEGA WOULD BE LOG(N)
+C=3 AND No = 2
+BIG 0 ADD 3 AND 2 AND PUT IT ON LEFT HAND SIDE SO 5 LOG(N)
+HERE C = 3, No=2
+since both are equal if big 0 and big omega are same we call it big theta 
+this would be an avg bound for above example 
+distribution of data would not affect the PROGRAM
+how we would determine big o and omerga o are equal
+
+Example:
+3 LOG(N) + 2N
+>=3 LOG(N) + 2N >= 2N (ALWAYS TAKE LARGEST DEGREE OF N) THIS WOULD BE BIG O
+
+EXAMPLE:
+3NLOG(N) +4N + 5LOG(N)
+3NLOG(N) (BIG THETA) <= 3NLOG(N) +4N + 5LOG(N) <= 12NLOG(N) (BIG 0)
+
+THETA WOULD BE NLOG(N)
+BINARY SEARCH TREES ARE RUNNING IN LOG(N)
+++++++++++++++++++++++++++++++++++++++++++
+Lecture 26 
+In stack ADT - Array implemention of Stack
+push and pop operation of list is constant time o(1)
+- Drawbacks: size limitation
+
+Linked list implemention of Stack
+- Insertion at head is push operation which is constant time o(1)
+- Pop operation would be head pop which is also O(1)
+- it is not efficient in terms of memory allocation
+
+NEW TOPIC QUEUE:
+ITS FIFO FOR EXAMPLE A WAITLIST IN A RESTURANT
+ARRAY IMPLEMENTAION OF QUE:
+
+POP IMLEMENTAION IS O(1)
+PUSH IMLEMENTAION IS 0(N)
+
+IMPLEMENTAION OF QUE WITH LINK LIST:
+RUN TIME OF PUSH OPERATION IS PUSH O(N)
+RUN TIME OF POP OPERATION IS O(1)
+
+IN DOUBLY LINK LIST BOTH PUSH AND POP ARE CONSTANT TIME
+CURCULAR BUFFER - RESEARCH ABOUT THIS
+
+=============================================================
+TREE DATA structures
+In tree we have only one parent not multiple parents
+It has a root and leaves 
+
+- nodes without childrens are called leaves or external nodes
+- nodes with childresn are called internal nodes
+- leave nodes at same level are called siblings
+- starting point is alway the root its similiar to LL in which we had a head
+- example of tree like parse tree which compiler use to process information/code 
+- number of ancestors in a tree define tree depth
+- height of tree can be find from the farthest node 
+- tree can be handled recursively. 
+- we can have a one node tree
+- every node itslef is a subtree
+- tree will always be accessable from root
+- in binary tree we could have maximum of 2 nodes or 0,1 or 2 nodes.
+-a full binary tree has either o leave or 2 leaves.
+-leaves can be filled by left to right 
+-if there is space on right put it at right
+-number of nodes we can have is 2^ level
+-number of internal nodes = 2^max level - 1
+-everything on the left of root should have smaller value and right side has bigger value
+-Binary search tree (BST) everything on left less and everyting on right larger than node or left side node
+-HOW TO TRAVERSE THE TREE?
+    1. PREORDER - 
+    2. INORDER - 
+    3. POSTORDER - In post order we visit children first then parent (destructor we have to delete leaves first and go back to root all delete all nodes)
+
+
